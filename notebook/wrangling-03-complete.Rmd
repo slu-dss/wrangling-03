@@ -182,14 +182,14 @@ arrange(starwars, homeworld, name)
 ## Random Samples 
 Sometimes it is useful to create a random sample of our data. This can use particularly helpful if you want to work out the kinks of a data cleaning or analysis process on a subset of the data, or if you want to create a subsample for additional analyses. 
 
-```{r}
+```{r random-mpg}
 # create sample
 mpg_random <- sample_n(mpg, size = 50)
 ```
 
 If you wanted every draw to have the same observations, you can set the "seed" (using `base::set.seed()`). In this case, it ensures that we all end up with the same random draw from the `mpg` data:
 
-```{r}
+```{r random-seed-mpg}
 # set seed
 set.seed(12345)
 
@@ -197,3 +197,8 @@ set.seed(12345)
 mpg_random2 <- sample_n(mpg, size = 50)
 ```
 
+Try taking a random sample of 40 observations from the `starwars` data frame. There is no need to `set.seed()` here:
+
+```{r sample-starwars}
+starwars_sample <- sample_n(starwars, size = 40)
+```
