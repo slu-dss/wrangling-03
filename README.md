@@ -12,7 +12,9 @@ This repository contains the third lesson for the Data Wrangling in R seminar. T
 ### Lesson Objectives
 By the end of this lesson, learners should be able to:
 
-1. 
+1. Create a new data frame with only a selection (i.e. a "subset") of observations based on characteristics present in the data.
+2. Create a new data frame with a set group of observations based on the current sort order.
+3. Create a new data frame with a random sample of observations.
 
 ### Lesson Resources
 * The [`SETUP.md`](/references/SETUP.md) file in the [`references/`](/references) directory contains a list of packages required for this lesson
