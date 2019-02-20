@@ -1,0 +1,22 @@
+Package: wrangling-03
+Title: Data Wrangling in R, Lesson 3 - Modifying Observations
+Version: 0.1.0
+Authors@R: c(person("Christina","Garcia", , email = "christina.garcia@slu.edu",
+                  role = c("aut", "cre")),
+             person("Christopher", "Prener", email = "chris.prener@slu.edu",
+                  role = c("aut", "cre")))
+Description: This repository contains the third lesson for the Data Wrangling
+    in R seminar. This lesson covers the basics of using dplyr to modify
+    existing observations.
+Depends: R (>= 3.3)
+License: CC-BY-SA-4.0 + LICENSE
+Web: https://slu-dss.github.io
+URL: https://github.com/slu-dss/wrangling-03
+BugReports: https://github.com/slu-dss/wrangling-03/issues
+Imports:
+    dplyr,
+    here,
+    knitr,
+    readr,
+    rmarkdown,
+    usethis
