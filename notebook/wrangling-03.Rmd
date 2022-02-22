@@ -8,7 +8,7 @@ output:
 ---
 
 ## Introduction 
-In the first two "Data Wrangling" sessions, we explored how to clean data, work with existing variables, and mutate variables in order to create new ones. This week we'll be taking a look at how to manage observations within a dataset. 
+In the first two "Data Wrangling" sessions, we explored how to clean data, work with existing variables, and mutate variables in order to create new ones. This week we'll be taking a look at how to manage observations within a data set. 
 
 ## Dependencies
 This week we'll continue to use the super powerful `dplyr` package within `tidyverse`. We also need the `readr` and `here` packages again:
@@ -23,7 +23,7 @@ library(here)      # manage file paths
 ```
 
 ## Read in Data
-This week we'll use the same two datasets as the last session -- the clean versions of `mpg` and `starwars`. Our first step is to read those in: 
+This week we'll use the same two data sets as the last session -- the clean versions of `mpg` and `starwars`. Our first step is to read those in: 
 
 ```{r read}
 mpg <- read_csv(here("data", "mpg.csv"))
@@ -32,7 +32,7 @@ starwars <- read_csv(here("data", "starwars.csv"))
 
 ## Review - Subsetting columns with `select`
 
-Depending on where you get your data from, you might end up with a dataset that has hundreds or even thousands of variables. Chances are you are not actually going to use all of these variables. The `select()` function allows you to select which variables you would like to include: 
+Depending on where you get your data from, you might end up with a data set that has hundreds or even thousands of variables. Chances are you are not actually going to use all of these variables. The `select()` function allows you to select which variables you would like to include: 
 
 ```{r select-mpg-1}
 mpg_select <- select(mpg, manufacturer, model, year, cty, hwy)
@@ -44,13 +44,15 @@ If the variables/columns you want to select happen to be right next to each othe
 mpg_select2 <- select(mpg, manufacturer:year)
 ```
 
-If you'd like to preserve all of the variables, but re-oder so that certain columns appear at the beginning of the data frame, you can embed the `everything()` function within `select()`. 
+If you'd like to preserve all of the variables, but re-order them so that certain columns appear at the beginning of the data frame, you can embed the `everything()` function within `select()`. As a bonus, we'll also show off an additional feature of `select()` - renaming variables on the fly. By using the same `new_name = old_name` syntax from `rename()`, we can rename variables as we subset columns.
 
 ```{r mpg-select-3}
-mpg_select3 <- select(mpg, cty, hwy, everything())
+
 ```
 
-Try using `select()` with the `starwars` data frame: 
+This decreases the amount of code we have to write, but might be harder for humans to read. So, there is a trade off here.
+
+Try using `select()` with the `starwars` data frame. (For example, selecting only those variables that are related to phenotype.) If you want, you can try renaming variables as well.
 
 ```{r}
 
@@ -63,10 +65,10 @@ The function `filter()` within the `dplyr` package allows us to subset observati
 2. which variables we would like to filter by
 3. what values of those variables we would like to select
 
-For example, say we want to filter out the automobiles from the `mpg` data frame that are Audis and have four cylinders: 
+For example, say we want to filter out the automobiles from the `mpg` data frame that are Audi's and have four cylinders: 
 
 ```{r filter-mpg-1}
-filter(mpg, manufacturer == "audi", cyl == 4)
+
 ```
 
 (Note the quotes for the character value "audi" and the lack of quotes for the integer value for cylinders.)
@@ -74,7 +76,7 @@ filter(mpg, manufacturer == "audi", cyl == 4)
 If we do nothing else, this only prints the filtered results, but we can also save them to a new data frame if we want to later do some analysis of only this subset of the data. 
 
 ```{r filter-mpg-2}
-audi4 <- filter(mpg, manufacturer == "audi", cyl == 4)
+
 ```
 
 Practice using the `filter()` function by making a subset of the `starwars` data:
@@ -98,22 +100,22 @@ Like we saw last time, we can use operators to get a little bit more complicated
 For example, let's `filter()` all automobiles that have four or six cylinders: 
 
 ```{r filter-mpg-3}
-filter(mpg, cyl==4 | cyl ==6)
+
 ```
 
 As we saw last time, we can also use the `%in%` operator to select multiple values to filter:
 
 ```{r filter-mpg-4}
-filter(mpg, cyl %in% c(4, 6))
+
 ```
 
 In this example, we are filtering all automobiles that are more than 6 cylinders and made before 2008: 
 
 ```{r filter-mpg-5}
-filter(mpg, cyl >= 6 & year < 2008)
+
 ```
 
-Yout turn! Try using `filter()` with some operators to filter the `starwars` data frame in two or three different ways: 
+Your turn! Try using `filter()` with some operators to filter the `starwars` data frame in two or three different ways: 
 
 ```{r filter-starwars-2}
 
@@ -125,7 +127,7 @@ Yout turn! Try using `filter()` with some operators to filter the `starwars` dat
 To instead subset your data by row position, you can use the `slice()` function to include only certain observations. All you have to specify is the data frame to be sliced and which rows you would like to include: 
 
 ```{r silce-mpg}
-mpg_sliced <- slice(mpg, 100:120)
+
 ```
 
 Remember you can also use `head()` and `tail()` to get a quick look at the first six and last six observations, respectively. 
@@ -149,19 +151,19 @@ Slice and dice in the `starwars` data frame:
 The function `arrange()` changes the order of rows within a data frame. You can think of it as analogous to the 'sort' function in Excel. First, we tell it what data frame we would like to re-order and then which variables(s) to order by: 
 
 ```{r arrange-mpg-1}
-arrange(mpg, cty)
+
 ```
 
 Just like with `filter()` and `slice()`, this new sorted order is not saved to the data frame unless you use the assignment operator: 
 
 ```{r arrange-mpg-2}
-mpg_sorted <- arrange(mpg, cty)
+
 ```
 
 Also, the default is ascending order unless you specify that you want descending order with `desc()`:
 
 ```{r arrange-mpg-3}
-arrange(mpg, desc(cty))
+
 ```
 
 *Note: Missing values (which we don't have any of!) are sorted to the end. 
@@ -169,7 +171,7 @@ arrange(mpg, desc(cty))
 If you specify more than one variable within the function, `arrange()` will sort by that variable after the preceding one (similar to 'sort/then by' in Excel).
 
 ```{r arrange-mpg-4}
-arrange(mpg, cty, class)
+
 ```
 
 Try re-ordering the rows of the `starwars` data frame: 
@@ -179,11 +181,10 @@ Try re-ordering the rows of the `starwars` data frame:
 ```
 
 ## Random Samples 
-Sometimes it is useful to create a random sample of our data. This can use particularly helpful if you want to work out the kinks of a data cleaning or analysis process on a subset of the data, or if you want to create a subsample for additional analyses. 
+Sometimes it is useful to create a random sample of our data. This can use particularly helpful if you want to work out the kinks of a data cleaning or analysis process on a subset of the data, or if you want to create a sub-sample for additional analyses. 
 
 ```{r random-mpg}
-# create sample
-mpg_random <- sample_n(mpg, size = 50)
+
 ```
 
 If you wanted every draw to have the same observations, you can set the "seed" (using `base::set.seed()`). In this case, it ensures that we all end up with the same random draw from the `mpg` data:
@@ -193,7 +194,7 @@ If you wanted every draw to have the same observations, you can set the "seed" (
 set.seed(12345)
 
 # create sample
-mpg_random2 <- sample_n(mpg, size = 50)
+
 ```
 
 Try taking a random sample of 40 observations from the `starwars` data frame. There is no need to `set.seed()` here:
